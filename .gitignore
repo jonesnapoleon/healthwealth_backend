@@ -1,0 +1,5 @@
+.vscode/settings.json
+.scannerwork/
+.static
+.staticfiless
+main/.env
