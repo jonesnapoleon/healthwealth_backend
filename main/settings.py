@@ -224,10 +224,10 @@ STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
 # CORS
 CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ORIGIN_WHITELIST = (
+CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "https://healthwealth.jonesnapoleon.com"
-)
+]
 
 # CLOUDINARY_STORAGE = {
 #     "CLOUD_NAME": env.str("CLOUDINARY_CLOUD_NAME"),
