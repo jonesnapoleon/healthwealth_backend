@@ -225,7 +225,8 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
-    "https://healthwealth.jonesnapoleon.com"
+    "https://healthwealth.jonesnapoleon.com",
+    "https://healthwealthlimited.netlify.app"
 ]
 
 # CLOUDINARY_STORAGE = {
