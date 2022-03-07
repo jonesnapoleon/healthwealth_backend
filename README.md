@@ -13,9 +13,7 @@ Clone the repository or download to your project directory.
 Install and prepare environment
 
 ```sh
-pip3 install pipenv
-pipenv install django~=3.1.0
-pipenv shell
+pip install -r requirements.txt
 ```
 
 Run
