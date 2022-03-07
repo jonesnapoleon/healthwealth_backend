@@ -49,16 +49,17 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.humanize",
+    
     "rest_framework",
     'rest_framework.authtoken',
 
     "whitenoise.runserver_nostatic",
+    "cloudinary"
     "drf_yasg",
 
     # CORS
     "corsheaders",
-    "django.contrib.humanize",
-    "cloudinary"
 ]
 
 MIDDLEWARE = [
