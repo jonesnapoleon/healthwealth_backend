@@ -1,5 +1,6 @@
 from django.db import models
 from .managers import UserManager
+from cloudinary.models import CloudinaryField
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
@@ -44,7 +45,7 @@ class Document(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     category = models.CharField(max_length=50, choices=DOCUMENT_CATEGORY_CHOICES, null=True)
-    document_url = models.FileField()
+    document_url = CloudinaryField('image')
 
     title = models.TextField(null=False)
     file_name = models.CharField(max_length=100)

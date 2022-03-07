@@ -12,18 +12,17 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 import os
 import environ
 from datetime import timedelta
 
 
+env = environ.Env(DEBUG=(bool, True))
 environ.Env.read_env()
 
-env = environ.Env(
-    # set casting, default value
-    DEBUG=(bool, False)
-)
-# reading .env file
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -53,13 +52,14 @@ INSTALLED_APPS = [
     "rest_framework",
     'rest_framework.authtoken',
 
-    # swagger
+    "whitenoise.runserver_nostatic",
     "drf_yasg",
     'storages',
 
     # CORS
     "corsheaders",
     "django.contrib.humanize",
+    "cloudinary"
 ]
 
 MIDDLEWARE = [
@@ -74,6 +74,8 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.BrokenLinkEmailsMiddleware",
     "django.middleware.common.CommonMiddleware",
+
+    "whitenoise.middleware.WhiteNoiseMiddleware"
 ]
 
 ROOT_URLCONF = "main.urls"
@@ -158,8 +160,8 @@ else:
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': os.environ['DATABASE_NAME'],
             'HOST': os.environ['DATABASE_HOST'],
-            'USER': os.environ['DATABASE_USER'] + '@' + os.environ['DATABASE_HOST'],
-            'PASSWORD': os.environ['DATABASE_PASSWORD']
+            'USER': os.environ['DATABASE_USER'],
+            'PASSWORD': os.environ['DATABASE_PASS']
         }
     }
 
@@ -199,26 +201,23 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-STATIC_LOCATION = "static"
+cloudinary.config( 
+  cloud_name = env("CLOUDINARY_CLOUD_NAME"), 
+  api_key = env("CLOUDINARY_API_KEY"), 
+  api_secret = env("CLOUDINARY_API_SECRET") 
+)
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, STATIC_LOCATION),)
+# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# STATIC_LOCATION = "static"
 
-DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
-STATICFILES_STORAGE = 'main.custom_storage.AzureMediaStorage'
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, STATIC_LOCATION),)
 
-AZURE_ACCOUNT_NAME = env("AZURE_ACCOUNT_NAME")
-AZURE_ACCOUNT_KEY = env('AZURE_ACCOUNT_KEY')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
-# AZURE_LOCATION = 'asia-pacific'
-AZURE_CONTAINER = 'health'
+# MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+# MEDIA_URL = '/media/'
 
-# AZURE_CONNECTION_STRING = env('AZURE_CONNECTION_STRING')
-
-MEDIA_LOCATION = f'http://{AZURE_ACCOUNT_NAME}.blob.core.windows.net/media'
-
-STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+# STATIC_URL = '/static/'
 
 
 # CORS
