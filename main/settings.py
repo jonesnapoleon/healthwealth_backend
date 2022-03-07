@@ -207,7 +207,7 @@ cloudinary.config(
   api_secret = env("CLOUDINARY_API_SECRET") 
 )
 
-# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 # STATIC_LOCATION = "static"
 
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, STATIC_LOCATION),)
@@ -217,7 +217,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 # MEDIA_URL = '/media/'
 
-# STATIC_URL = '/static/'
+STATIC_URL = '/static/'
 
 
 # CORS
