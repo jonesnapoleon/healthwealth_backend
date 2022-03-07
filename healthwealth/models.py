@@ -45,7 +45,7 @@ class Document(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     category = models.CharField(max_length=50, choices=DOCUMENT_CATEGORY_CHOICES, null=True)
-    document_url = CloudinaryField('image')
+    document_url = CloudinaryField('image', folder="healthwealth")
 
     title = models.TextField(null=False)
     file_name = models.CharField(max_length=100)
