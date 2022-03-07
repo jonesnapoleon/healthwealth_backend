@@ -54,7 +54,6 @@ INSTALLED_APPS = [
 
     "whitenoise.runserver_nostatic",
     "drf_yasg",
-    'storages',
 
     # CORS
     "corsheaders",
